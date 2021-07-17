@@ -1,0 +1,57 @@
+import java.util.*;
+  
+  public class Main{
+  
+  public static void main(String[] args) {
+      Scanner scn = new Scanner(System.in);
+      int b = scn.nextInt();
+      int n1 = scn.nextInt();
+      int n2 = scn.nextInt();
+  
+      int d = getSum(b, n1, n2);
+      System.out.println(d);
+   }
+  
+   public static int getSum(int b, int n1, int n2){
+       // write ur code here
+       
+       int decn1=basetodec(b,n1);
+       int decn2=basetodec(b,n2);
+       int sum =decn1+decn2;         // sum also works fine
+       int reqans=dectobase(b,sum);
+       return(reqans);
+       //System.out.println(reqans);
+       
+   }
+   public static int basetodec(int b,int n)  //this function works fine
+   {
+       int rem=0;
+       int multi=1;
+       int ans=0;
+       while(n!=0)
+       { 
+           rem=n%10;
+           ans=ans+rem*multi;
+           multi=multi*b;
+           n=n/10;
+         
+       } 
+       //System.out.println(ans);
+       return (ans);
+   }
+   
+   public static int dectobase(int b,int n)
+   {
+      int ans=0;
+      int pow=1;
+      int rem=0;
+      while(n!=0)
+      {
+          rem=n%b;
+          ans=ans+pow*rem;
+          pow=pow*10;
+          n=n/b;
+      }
+      return(ans);
+   }
+  }

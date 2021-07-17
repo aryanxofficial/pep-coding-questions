@@ -1,0 +1,55 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        Scanner scn=new Scanner(System.in);
+        int n =scn.nextInt();
+        
+        int[][] mat=new int[n][n];
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                mat[i][j]=scn.nextInt();
+            }
+        }
+        
+ 
+        for(int i=0;i<n;i++)
+        {
+            //to find the minimum element in a particukar row and its column
+            int min=mat[i][0];
+            int col=0;
+            
+            for(int j=0;j<n;j++)
+            {
+                if(min>=mat[i][j])
+                {
+                min=mat[i][j];
+                col=j;
+                    
+                }
+            }
+           boolean sp=true;
+           for(int r=0;r<mat.length;r++)
+           {
+               if(mat[r][col]>min)
+               {
+                   sp=false;
+                   break;
+               }
+           }
+           if(sp==true)
+           {
+            System.out.println(min);
+            return;
+           }
+        }
+        System.out.println("Invalid input");
+    }
+    
+
+}

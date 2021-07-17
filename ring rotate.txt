@@ -1,0 +1,117 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner scn =new Scanner(System.in);
+        int n = scn.nextInt();
+        int m = scn.nextInt();
+        int[][] mat = new int[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                mat[i][j] = scn.nextInt();
+            }
+        }
+        int s = scn.nextInt();
+        int r = scn.nextInt();
+        int[]a = fill1darray(mat,s);
+        rotate(a,r);
+        fillshell(mat,s,a);
+        display(mat);
+        
+    }
+    // rotate of 1-D array
+    public static void rotate(int[] a, int r){
+        r= r % a.length;
+        if(r<0){
+            r= r + a.length;
+        }
+        reverse(a,0,a.length-r-1);
+        reverse(a,a.length-r,a.length-1);
+        reverse(a,0,a.length-1);
+    }
+    // reverse of 1-D array
+    public static void reverse(int[] a, int li,int ri){
+        while(li<ri){
+            int temp =a[li];
+            a[li] = a[ri];
+            a[ri] = temp;
+            li++;
+            ri--;
+        }
+    }
+    //filling 1-D array from shell
+    public static int[] fill1darray(int[][] mat,int s){
+        int rs = s-1;  int cs = s-1;
+        int re = mat.length-s; int ce = mat[0].length-s;
+        int sz = (2*(re-rs+1)+2*(ce-cs+1)-4) ;  // size of one d array needed
+        int []a= new int[sz];
+        int ind =0;
+        //left wall
+        for(int i=rs;i<=re;i++){
+            a[ind]=mat[i][cs];
+            ind++;
+        }cs++;
+        //bottom wall
+        for(int i =cs;i<=ce;i++){
+            a[ind]= mat[re][i];
+            ind++;
+        } re--;
+        //right wall
+        for(int i=re;i>=rs;i--){
+            a[ind]= mat[i][ce];
+            ind++;
+        } ce--;
+        //top wall
+        for(int i =ce;i>=cs;i--){
+            a[ind] =mat[rs][i];
+            ind++;
+        } rs++;
+        
+        return a;
+        
+    }
+    //filling rotated 1-D array in s shell of matrix
+     public static void fillshell(int[][] mat,int s,int[] a){
+        int rs = s-1;  int cs = s-1;
+        int re = mat.length-s; int ce = mat[0].length-s;
+        
+       
+        int ind =0;
+        //left wall
+        for(int i=rs;i<=re;i++){
+            mat[i][cs]=a[ind];
+            ind++;
+        }cs++;
+        //bottom wall
+        for(int i =cs;i<=ce;i++){
+            mat[re][i]=a[ind];
+            ind++;
+        } re--;
+        //right wall
+        for(int i=re;i>=rs;i--){
+            mat[i][ce]=a[ind];
+            ind++;
+        } ce--;
+        //top wall
+        for(int i =ce;i>=cs;i--){
+            mat[rs][i]=a[ind];
+            ind++;
+        } rs++;
+        
+        
+        
+    }
+    
+
+    public static void display(int[][] arr){
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr[0].length; j++){
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+}
