@@ -1,0 +1,58 @@
+import java.util.*;
+
+public class Main{
+
+public static void main(String[] args) {
+    Scanner scn = new Scanner(System.in);
+
+     // write ur code here
+     
+     int n =scn.nextInt();
+     for(int i=1;i<=n;i++)
+     {
+         System.out.print("*"+"\t");
+     }
+     System.out.println();
+     
+     int gap1=1;
+
+     for(int i=2;i<=(n/2);i++)
+     { 
+         int gap2=n-2*i;
+         for(int j=1;j<=gap1;j++)          //starting gaps
+         {
+             System.out.print("\t");
+         }
+         
+        System.out.print("*\t");             //fisrt star
+        
+        for(int j=1;j<=gap2;j++)
+        {
+           System.out.print("\t");        //middle gaps
+        }
+        
+        System.out.print("*");            //last star
+        
+        System.out.println();
+        gap1++;
+        
+     }
+     int nst=1;
+     for(int i=1;i<=(n/2)+1;i++)
+     {
+         for(int j=1;j<=gap1;j++)
+         {
+             System.out.print("\t");
+         }
+         for(int j=1;j<=nst;j++)
+         {
+             System.out.print("*\t");
+         }
+         gap1--;
+         nst=nst+2;
+         System.out.println();
+     }
+     
+
+ }
+}
